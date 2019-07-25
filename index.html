@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Create Image Slider with Vanilla JavaScript</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .yourSlide {
+      display: none;
+    }
+
+    .yourSlide img {
+      border-radius: 5px;
+    }
+
+    .slideshow-container {
+      max-width: 500px;
+      position: relative;
+      margin: auto;
+      /* border: 1px solid red; */
+    }
+
+    /* -- dot ---- */
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .active {
+      background-color: #717171;
+    }
+
+    /* ---- fading ---- */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: .4;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .dots-function {
+      position:absolute;
+      bottom: 5px;
+      left: 220px;
+    }
+
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Automatic Slideshow</h2>
+  <p style="text-align: center;">Image will be change every 3 seconds</p>
+
+  <div class="slideshow-container">
+    <div class="yourSlide fade">
+      <img src="https://images.pexels.com/photos/2537632/pexels-photo-2537632.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width: 500px;height: auto;">
+    </div>
+    <div class="yourSlide fade">
+      <img src="https://images.pexels.com/photos/2555800/pexels-photo-2555800.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:500px;height:auto;">
+    </div>
+    <div class="yourSlide fade">
+      <img src="https://images.pexels.com/photos/2555801/pexels-photo-2555801.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" style="width:500px;height:auto;">
+    </div>
+
+    <div class="dots-function" style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <script>
+    var slideIndex = 0;
+    // call function //
+    showYourSlide();
+
+    // create function --- show slide 
+    function showYourSlide(){
+      
+      var i;
+      var slides = document.querySelectorAll('.yourSlide');
+      var titik = document.querySelectorAll('.dot');
+
+      for (i=0;i<slides.length;i++) {
+        slides[i].style.display = "none";
+      }
+
+      slideIndex++;
+
+      // back to
+      if (slideIndex > slides.length){
+        slideIndex = 1;
+      }
+
+      for(i=0;i<titik.length;i++){
+        titik[i].className = titik[i].className.replace(" active", "");
+      }
+
+      slides[slideIndex-1].style.display = "block";
+      titik[slideIndex-1].className += " active";
+      setTimeout(showYourSlide, 3000);
+    }
+  </script>
+</body>
+</html>
